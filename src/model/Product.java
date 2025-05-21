@@ -1,27 +1,28 @@
 package model;
 
 import java.time.LocalDateTime;
-//! Representación de la información de un producto con sus atriburtos
-public class Product { 
-    protected int idProduct; 
+
+// ? Representación de la información de un producto con sus atriburtos
+public class Product {
+    protected int idProduct;
     protected String nameProduct;
     protected String descriptionProduct;
     protected int idCategory;
     protected int idSupplier;
     protected LocalDateTime dateAdmission;
-    protected static int contadorIdProduct = 1; //?Atributo estatico para generar IDs únicos 
+    protected static int contadorIdProduct = 1; // *Atributo estatico para generar IDs únicos
 
-//!Constructor de la clase products
+    // ? Constructor de la clase products
     public Product(int idProduct, String nameProduct, String descriptionProduct, int idCategory, int idSupplier) {
-        this.idProduct = contadorIdProduct++; //?Asigna el ID automáticamente y lo incrementa para el sigueinte producto
+        this.idProduct = contadorIdProduct++; // *Asigna el ID automáticamente y lo incrementa para el sigueinte producto
         this.nameProduct = nameProduct;
         this.descriptionProduct = descriptionProduct;
         this.idCategory = idCategory;
         this.idSupplier = idSupplier;
-        this.dateAdmission = LocalDateTime.now(); //?Establece la fecha de admision de la creacion de objeto.
+        this.dateAdmission = LocalDateTime.now(); // ?Establece la fecha de la creacion del objeto.
     }
 
-    //! Controladores de acceso, getter and setter 
+    // ? Controladores de acceso, getter and setter
     public int getIdProduct() {
         return idProduct;
     }
@@ -62,7 +63,7 @@ public class Product {
         return dateAdmission;
     }
 
-    //!Sobreescitura del metodo toString()
+    // ? Sobreescitura del metodo toString()
     @Override
     public String toString() {
         return "ID: " + idProduct + "| Producto: " + nameProduct + "| Descripcion: " + descriptionProduct
