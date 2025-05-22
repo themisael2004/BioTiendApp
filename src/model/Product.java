@@ -3,22 +3,25 @@ package model;
 import java.time.LocalDateTime;
 
 // ? Representación de la información de un producto con sus atriburtos
-public class Product {
+public abstract class Product {
     protected int idProduct;
     protected String nameProduct;
     protected String descriptionProduct;
     protected int idCategory;
     protected int idSupplier;
     protected LocalDateTime dateAdmission;
+    protected double price;
     protected static int contadorIdProduct = 1; // *Atributo estatico para generar IDs únicos
 
     // ? Constructor de la clase products
-    public Product(int idProduct, String nameProduct, String descriptionProduct, int idCategory, int idSupplier) {
+    public Product(int idProduct, String nameProduct, String descriptionProduct, int idCategory, int idSupplier,
+            double price) {
         this.idProduct = contadorIdProduct++; // *Asigna el ID automáticamente y lo incrementa para el sigueinte producto
         this.nameProduct = nameProduct;
         this.descriptionProduct = descriptionProduct;
         this.idCategory = idCategory;
         this.idSupplier = idSupplier;
+        this.price = price;
         this.dateAdmission = LocalDateTime.now(); // ?Establece la fecha de la creacion del objeto.
     }
 
@@ -29,6 +32,14 @@ public class Product {
 
     public String getNameProduct() {
         return nameProduct;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public void setNameProduct(String nameProduct) {
@@ -66,7 +77,13 @@ public class Product {
     // ? Sobreescitura del metodo toString()
     @Override
     public String toString() {
-        return "ID: " + idProduct + "| Producto: " + nameProduct + "| Descripcion: " + descriptionProduct
-                + "| Categoria: " + idCategory + "| Proveedor: " + idSupplier + "| Creacion: " + dateAdmission;
+        return "ID: " + idProduct +
+                "| Nombre: " + nameProduct +
+                "| Categoria: " + idCategory +
+                "| Precio Base: " + String.format("%.2f", price) +
+                "| Descripción: " + descriptionProduct +
+                "| ID Categoría: " + idCategory +
+                "| ID Proveedor: " + idSupplier +
+                "| Fecha Admisión: " + dateAdmission;
     }
 }
