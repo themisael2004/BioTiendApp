@@ -2,8 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 
-// ? Representación de la información de un producto con sus atriburtos
-public abstract class Product {
+public abstract class organicProduct {
     protected int idProduct;
     protected String nameProduct;
     protected String descriptionProduct;
@@ -11,11 +10,10 @@ public abstract class Product {
     protected LocalDateTime dateAdmission;
     protected double price;
     protected String type;
-    protected static int contadorIdProduct = 1; // * Atributo estatico para generar IDs únicos
 
-    public Product(String nameProduct, String descriptionProduct, int idSupplier,
+    public organicProduct(int idProduct, String nameProduct, String descriptionProduct, int idSupplier,
             LocalDateTime dateAdmission, String type, double price) {
-        this.idProduct = contadorIdProduct++; // *  se asigna automáticamente
+        this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.descriptionProduct = descriptionProduct;
         this.idSupplier = idSupplier;
@@ -24,9 +22,36 @@ public abstract class Product {
         this.price = price;
     }
 
-    public abstract double calculatePrice();
+    public abstract String getDetails();
 
-    public abstract double applyDiscount();
+
+    public int getIdProduct() {
+        return idProduct;
+    }
+
+    public String getNameProduct() {
+        return nameProduct;
+    }
+
+    public String getDescriptionProduct() {
+        return descriptionProduct;
+    }
+
+    public int getIdSupplier() {
+        return idSupplier;
+    }
+
+    public LocalDateTime getDateAdmission() {
+        return dateAdmission;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getType() {
+        return type;
+    }
 
     @Override
     public String toString() {
