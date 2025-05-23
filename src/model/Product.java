@@ -7,83 +7,32 @@ public abstract class Product {
     protected int idProduct;
     protected String nameProduct;
     protected String descriptionProduct;
-    protected int idCategory;
     protected int idSupplier;
     protected LocalDateTime dateAdmission;
     protected double price;
-    protected static int contadorIdProduct = 1; // *Atributo estatico para generar IDs únicos
+    protected String type;
+    protected static int contadorIdProduct = 1; // * Atributo estatico para generar IDs únicos
 
-    // ? Constructor de la clase products
-    public Product(int idProduct, String nameProduct, String descriptionProduct, int idCategory, int idSupplier,
-            double price) {
-        this.idProduct = contadorIdProduct++; // *Asigna el ID automáticamente y lo incrementa para el sigueinte producto
+    public Product(String nameProduct, String descriptionProduct, int idSupplier,
+            LocalDateTime dateAdmission, String type, double price) {
+        this.idProduct = contadorIdProduct++; // *  se asigna automáticamente
         this.nameProduct = nameProduct;
         this.descriptionProduct = descriptionProduct;
-        this.idCategory = idCategory;
         this.idSupplier = idSupplier;
-        this.price = price;
-        this.dateAdmission = LocalDateTime.now(); // ?Establece la fecha de la creacion del objeto.
-    }
-
-    // ? Controladores de acceso, getter and setter
-    public int getIdProduct() {
-        return idProduct;
-    }
-
-    public String getNameProduct() {
-        return nameProduct;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
+        this.dateAdmission = dateAdmission;
+        this.type = type;
         this.price = price;
     }
 
-    public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
-    }
+    public abstract double calculatePrice();
 
-    public String getDescriptionProduct() {
-        return descriptionProduct;
-    }
+    public abstract double applyDiscount();
 
-    public void setDescriptionProduct(String descriptionProduct) {
-        this.descriptionProduct = descriptionProduct;
-    }
-
-    public int getIdCategory() {
-        return idCategory;
-    }
-
-    public void setIdCategory(int idCategory) {
-        this.idCategory = idCategory;
-    }
-
-    public int getIdSupplier() {
-        return idSupplier;
-    }
-
-    public void setIdSupplier(int idSupplier) {
-        this.idSupplier = idSupplier;
-    }
-
-    public LocalDateTime getDateAdmission() {
-        return dateAdmission;
-    }
-
-    // ? Sobreescitura del metodo toString()
     @Override
     public String toString() {
-        return "ID: " + idProduct +
-                "| Nombre: " + nameProduct +
-                "| Categoria: " + idCategory +
-                "| Precio Base: " + String.format("%.2f", price) +
-                "| Descripción: " + descriptionProduct +
-                "| ID Categoría: " + idCategory +
-                "| ID Proveedor: " + idSupplier +
-                "| Fecha Admisión: " + dateAdmission;
+        return "Product [idProduct=" + idProduct + ", nameProduct=" + nameProduct + ", descriptionProduct="
+                + descriptionProduct + ", idSupplier=" + idSupplier + ", dateAdmission=" + dateAdmission + ", price="
+                + price + ", type=" + type + "]";
     }
+
 }
