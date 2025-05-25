@@ -1,4 +1,4 @@
-package model;
+package model.Supplier;
 
 public abstract class Supplier {
     protected int idSupplier;

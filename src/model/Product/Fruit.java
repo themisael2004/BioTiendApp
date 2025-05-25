@@ -1,15 +1,15 @@
-package model;
+package model.Product;
 
 import java.time.LocalDateTime;
 
-public class Vegetables extends organicProduct {
-    private String vegetableType;
+public class Fruit extends OrganicProduct {
+    private String fruitType;
     private int freshnessDays;
 
-    public Vegetables(int idProduct, String nameProduct, String descriptionProduct, int idSupplier,
-                      LocalDateTime dateAdmission, String type, double price, String vegetableType, int freshnessDays) {
+    public Fruit(int idProduct, String nameProduct, String descriptionProduct, int idSupplier,
+                 LocalDateTime dateAdmission, String type, double price, String fruitType, int freshnessDays) {
         super(idProduct, nameProduct, descriptionProduct, idSupplier, dateAdmission, type, price);
-        this.vegetableType = vegetableType;
+        this.fruitType = fruitType;
         this.freshnessDays = freshnessDays;
     }
 
@@ -35,13 +35,13 @@ public class Vegetables extends organicProduct {
     @Override
     public String getDetails() {
         return super.toString() +
-                "| Tipo: Verdura" +
-                "| Verdura: " + vegetableType +
+                "| Tipo: Fruta" +
+                "| Fruta: " + fruitType +
                 "| Dias frescura: " + freshnessDays;
     }
 
-    public String getVegetableType() {
-        return vegetableType;
+    public String getFruitType() {
+        return fruitType;
     }
 
     public int getFreshnessDays() {

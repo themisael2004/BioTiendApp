@@ -1,8 +1,8 @@
-package model;
+package model.Product;
 
 import java.time.LocalDateTime;
 
-public abstract class organicProduct {
+public abstract class OrganicProduct {
     protected int idProduct;
     protected String nameProduct;
     protected String descriptionProduct;
@@ -11,7 +11,7 @@ public abstract class organicProduct {
     protected double price;
     protected String type;
 
-    public organicProduct(int idProduct, String nameProduct, String descriptionProduct, int idSupplier,
+    public OrganicProduct(int idProduct, String nameProduct, String descriptionProduct, int idSupplier,
             LocalDateTime dateAdmission, String type, double price) {
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;

@@ -1,4 +1,4 @@
-package model;
+package model.Supplier;
 
 public class InternationalSupplier extends Supplier {
     private final String supplierType = "International";
