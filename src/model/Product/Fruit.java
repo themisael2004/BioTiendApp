@@ -6,6 +6,7 @@ public class Fruit extends OrganicProduct {
     private String fruitType;
     private int freshnessDays;
 
+
     public Fruit(int idProduct, String nameProduct, String descriptionProduct, int idSupplier,
                  LocalDateTime dateAdmission, String type, double price, String fruitType, int freshnessDays) {
         super(idProduct, nameProduct, descriptionProduct, idSupplier, dateAdmission, type, price);

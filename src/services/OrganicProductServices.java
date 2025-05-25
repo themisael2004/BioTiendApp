@@ -6,6 +6,7 @@ import java.util.List;
 
 import model.Product.OrganicProduct;
 import model.Product.Vegetables;
+import model.Product.Fruit;
 
 public class OrganicProductServices {
     private List<OrganicProduct> _organicProduct;
@@ -23,6 +24,15 @@ public class OrganicProductServices {
                 type, price, vegetableType, freshnessDays);
         _organicProduct.add(newVegetables);
     }
+    //? Metodo para crear un producto de tipo  fruta
+    public void createFruitProduct(String nameProduct, String descriptionProduct, int idSupplier,
+                                   LocalDateTime dateAdmission, String type, double price, String fruitType, int freshnessDays) {
+        Fruit newFruit = new Fruit(nextId++, nameProduct, descriptionProduct, idSupplier, dateAdmission,
+                type, price, fruitType, freshnessDays);
+        _organicProduct.add(newFruit);
+
+    }
+
 
     // ?Metodo para obtener todo los productos
     public List<OrganicProduct> getAllOrganicProducts() {
