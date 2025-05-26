@@ -19,12 +19,25 @@ public abstract class Supplier {
         this.supplierContact = supplierContact;
     }
 
-    public abstract void createSupplier();
-    public abstract void readSupplier();
+    public abstract String getDetails();
 
-    public void setIdSupplier(int idSupplier) {
-        this.idSupplier = idSupplier;
-    }
+    public int getIdSupplier() { return idSupplier; }
+    public void setIdSupplier(int idSupplier) { this.idSupplier = idSupplier; }
+
+    public String getNameSupplier() { return nameSupplier; }
+    public void setNameSupplier(String nameSupplier) { this.nameSupplier = nameSupplier; }   
+    
+    public String getSupplierDirection() { return supplierDirection; }
+    public void setSupplierDirection(String supplierDirection) { this.supplierDirection = supplierDirection; }
+
+    public String getSupplierCity() { return supplierCity; }
+    public void setSupplierCity(String supplierCity) { this.supplierCity = supplierCity; }
+    
+    public String getSupplierCountry() { return supplierCountry; }
+    public void setSupplierCountry(String supplierCountry) { this.supplierCountry = supplierCountry; }
+
+    public String getSupplierContact() { return supplierContact; }
+    public void setSupplierContact(String supplierContact) { this.supplierContact = supplierContact; }
 
     @Override
     public String toString() {

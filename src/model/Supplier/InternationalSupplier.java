@@ -1,21 +1,24 @@
 package model.Supplier;
 
 public class InternationalSupplier extends Supplier {
-    private final String supplierType = "International";
+    private String isoCountryCode;
 
-    public InternationalSupplier (int idSupplier, String nameSupplier, String supplierDescription, String supplierDirection, String supplierCity, String supplierCountry, String supplierContact) {
+    public InternationalSupplier (int idSupplier, String nameSupplier, String supplierDescription, String supplierDirection, String supplierCity, String supplierCountry, String supplierContact, String isoCountryCode) {
         super(idSupplier, nameSupplier, supplierDescription, supplierDirection, supplierCity, supplierCountry, supplierContact);
+        this.isoCountryCode = isoCountryCode;
     }
 
 @Override
-public void createSupplier() {
-    System.out.println("Proveedor locarl creado");
+public String getDetails() {
+    return "Proveedor Internacional - Código: " + isoCountryCode;
 }
 
-@Override
-public void readSupplier() {
-    System.out.println("Datos del Proveedor Local: ");
-    System.out.println(this.toString());
-    System.out.println("Tipo: " + supplierType);
+public String getisoCountryCode() {
+    return isoCountryCode;
 }
+
+public void SetisoCountryCode(String isoCountryCode) {
+    this.isoCountryCode = isoCountryCode;
+}
+
 }

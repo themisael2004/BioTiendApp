@@ -1,21 +1,23 @@
 package model.Supplier;
 
 public class LocalSupplier extends Supplier {
-    private final String supplierType = "Local";
+    private String regionalCode;
 
-    public LocalSupplier (int idSupplier, String nameSupplier, String supplierDescription, String supplierDirection, String supplierCity, String supplierCountry, String supplierContact) {
+    public LocalSupplier (int idSupplier, String nameSupplier, String supplierDescription, String supplierDirection, String supplierCity, String supplierCountry, String supplierContact, String regionalCode) {
         super(idSupplier, nameSupplier, supplierDescription, supplierDirection, supplierCity, supplierCountry, supplierContact);
+        this.regionalCode = regionalCode;
     }
 
 @Override
-public void createSupplier() {
-    System.out.println("Proveedor locarl creado");
+public String getDetails() {
+    return "Proveedor Local - Código Regional: " + regionalCode;
 }
 
-@Override
-public void readSupplier() {
-    System.out.println("Datos del Proveedor Local: ");
-    System.out.println(this.toString());
-    System.out.println("Tipo: " + supplierType);
+public String getRegionalCode() {
+    return regionalCode;
+}
+
+public void setRegionalCode(String regionalCode) {
+    this.regionalCode = regionalCode;
 }
 }
