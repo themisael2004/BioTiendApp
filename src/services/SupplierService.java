@@ -14,4 +14,13 @@ public class SupplierService {
         LocalSupplier local = new LocalSupplier(id, name, description, direction, city, country, contact, regionalCode);
         suppliers.add(local);
     }
+    
+    public void createInternacionalSupplier(int id, String name, String direction, String city, String country, String contact, String isoCode){
+        InternationalSupplier intl = new InternationalSupplier(id, name, direction, city, country, contact, isoCode, country);
+        suppliers.add(intl);
+    }
+
+    public List<Supplier> getALLSuppliers() {
+        return suppliers;
+    }
 }
