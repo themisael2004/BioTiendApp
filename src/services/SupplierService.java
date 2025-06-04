@@ -8,22 +8,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SupplierService {
-    private List<Supplier> suppliers = new ArrayList<>();
+     private List<Supplier> suppliers; 
+    private int nextId; 
 
-    public void createLocalSupplier(int id, String name, String description, String direction, String city,
+    public SupplierService() {
+        this.suppliers = new ArrayList<>();
+        this.nextId = 1; 
+    }
+
+    public void createLocalSupplier(String name, String supplierProductType, String direction, String city,
             String country, String contact, String regionalCode) {
-        LocalSupplier local = new LocalSupplier(id, name, description, direction, city, country, contact, regionalCode);
+        LocalSupplier local = new LocalSupplier(nextId++, name, supplierProductType, direction, city, country, contact, regionalCode);
         suppliers.add(local);
     }
 
-    public void createInternacionalSupplier(int id, String name, String direction, String city, String country,
+    public void createInternacionalSupplier(String name, String supplierProductType, String city, String country,
             String contact, String isoCode) {
-        InternationalSupplier intl = new InternationalSupplier(id, name, direction, city, country, contact, contact,
+        InternationalSupplier intl = new InternationalSupplier(nextId++, name, supplierProductType, city, country, contact, contact,
                 isoCode);
         suppliers.add(intl);
     }
 
     public List<Supplier> getALLSuppliers() {
-        return suppliers;
+       return new ArrayList<>(suppliers);
     }
 }

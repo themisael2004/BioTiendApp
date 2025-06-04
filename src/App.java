@@ -1,5 +1,10 @@
+import services.SupplierService;
+import ui.SupplierUi;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+          SupplierService supplierService = new SupplierService();
+        SupplierUi suplierUi = new SupplierUi(supplierService);
+        suplierUi.runSupplierMenu();
     }
 }

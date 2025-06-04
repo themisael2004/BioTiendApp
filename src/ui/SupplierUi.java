@@ -2,6 +2,8 @@ package ui;
 
 import services.SupplierService;
 import model.Supplier.Supplier;
+
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,125 +16,102 @@ public class SupplierUi {
         this.scanner = new Scanner(System.in);
     }
 
-    public void showSupplierMenu() {
-        int option;
+    public void runSupplierMenu() {
+        int choice;
         do {
-            System.out.println("=== MENÚ PRINCIPAL ===");
-            System.out.println("1. Crear proveedor local");
-            System.out.println("2. Crear proveedor internacional");
-            System.out.println("3. Listar proveedores");
-            System.out.println("4. Buscar por país");
-            System.out.println("5. Buscar por ID");
-            System.out.println("6. Salir");
-            System.out.print("Opción: ");
-            
-            try {
-                option = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                option = -1;
-            }
+            displayMenu();
+            choice = getUserChoice();
 
-            switch (option) {
+            switch (choice) {
                 case 1:
-                    createLocalSupplier();
+                    createSupplierFlow();
                     break;
                 case 2:
-                    createInternationalSupplier();
+                    listAllSuppliersFlow();
                     break;
                 case 3:
-                    listSuppliers();
-                    break;
-                case 4:
-                    searchByCountry();
-                    break;
-                case 5:
                     searchById();
                     break;
-                case 6:
-                    System.out.println("Saliendo del sistema...");
+                case 0:
+                    System.out.println("Volviendo al menú principal...");
                     break;
                 default:
-                    System.out.println("Opción inválida");
+                    System.out.println("Opción inválida. Por favor, intente de nuevo.");
             }
-        } while (option != 6);
+        } while (choice != 0);
+        scanner.close();
     }
 
-    private void createLocalSupplier() {
-        System.out.println("=== NUEVO PROVEEDOR LOCAL ===");
-        
-        System.out.print("ID: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        
-        System.out.print("Nombre: ");
+    private void displayMenu() {
+        System.out.println("\n--- Menú Principal de Gestión de Proveedores ---");
+        System.out.println("1. Crear Nuevo Proveedor");
+        System.out.println("2. Listar Todos los Proveedores");
+        System.out.println("3. Buscar Proveedor por ID");
+        System.out.println("0. Salir");
+        System.out.print("Seleccione una opción: ");
+    }
+
+    private void createSupplierFlow() {
+        System.out.println("\n--- Crear Nuevo Proveedor ---");
+
+        System.out.print("¿Es proveedor [I]nternacional o [L]ocal? (I/L): ");
+        String typeChoice = scanner.nextLine();
+
+        System.out.print("Nombre del proveedor: ");
         String name = scanner.nextLine();
-        
-        System.out.print("Descripción: ");
-        String description = scanner.nextLine();
-        
+
         System.out.print("Dirección: ");
         String direction = scanner.nextLine();
-        
+
         System.out.print("Ciudad: ");
         String city = scanner.nextLine();
-        
+
         System.out.print("País: ");
         String country = scanner.nextLine();
-        
-        System.out.print("Contacto: ");
+
+        System.out.print("Contacto (email/teléfono): ");
         String contact = scanner.nextLine();
-        
-        System.out.print("Código Regional: ");
-        String regionalCode = scanner.nextLine();
 
-        supplierService.createLocalSupplier(id, name, description, direction, city, country, contact, regionalCode);
-        System.out.println("Proveedor local registrado");
-    }
+        if (typeChoice.equalsIgnoreCase("I")) {
+            System.out.print("Código de país internacional (ISO): ");
+            String isoCountryCode = scanner.nextLine();
+            supplierService.createInternacionalSupplier(name, direction, city, country, contact, isoCountryCode);
 
-    private void createInternationalSupplier() {
-        System.out.println("=== NUEVO PROVEEDOR INTERNACIONAL ===");
-        
-        System.out.print("ID: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        
-        System.out.print("Nombre: ");
-        String name = scanner.nextLine();
-        
-        System.out.print("Dirección: ");
-        String direction = scanner.nextLine();
-        
-        System.out.print("Ciudad: ");
-        String city = scanner.nextLine();
-        
-        System.out.print("País: ");
-        String country = scanner.nextLine();
-        
-        System.out.print("Contacto: ");
-        String contact = scanner.nextLine();
-        
-        System.out.print("Código ISO: ");
-        String isoCode = scanner.nextLine();
+        } else if (typeChoice.equalsIgnoreCase("L")) {
+            System.out.print("Tipo de producto que provee: ");
+            String supplierProductType = scanner.nextLine();
 
-        supplierService.createInternacionalSupplier(id, name, direction, city, country, contact, isoCode);
-        System.out.println("Proveedor internacional registrado");
-    }
+            System.out.print("Código regional: ");
+            String regionalCode = scanner.nextLine();
 
-    private void listSuppliers() {
-        List<Supplier> suppliers = supplierService.getALLSuppliers();
-        System.out.println("=== LISTA DE PROVEEDORES ===");
-        for (Supplier supplier : suppliers) {
-            System.out.println(supplier.getDetails());
+            supplierService.createLocalSupplier(name, supplierProductType, direction, city, country, contact, regionalCode);
+
+        } else {
+            System.out.println("Tipo de proveedor inválido. El proveedor no fue creado.");
         }
     }
 
-    private void searchByCountry() {
-        System.out.print("País a buscar: ");
-        String country = scanner.nextLine();
-        
-        List<Supplier> results = supplierService.getALLSuppliers();
-        System.out.println("=== RESULTADOS ===");
-        for (Supplier supplier : results) {
-            if (supplier.getSupplierCountry().equalsIgnoreCase(country)) {
-                System.out.println(supplier.getDetails());
+    private int getUserChoice() {
+        try {
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            return choice;
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada inválida. Por favor, ingrese un número.");
+            scanner.nextLine();
+            return -1;
+        }
+    }
+
+    private void listAllSuppliersFlow() {
+        System.out.println("\n--- Listado de Todos los Proveedores ---");
+        List<Supplier> allSuppliers = supplierService.getALLSuppliers();
+
+        if (allSuppliers.isEmpty()) {
+            System.out.println("No hay proveedores registrados.");
+        } else {
+            for (Supplier s : allSuppliers) {
+                System.out.println(s.getDetails());
             }
         }
     }
@@ -140,7 +119,7 @@ public class SupplierUi {
     private void searchById() {
         System.out.print("ID a buscar: ");
         int id = Integer.parseInt(scanner.nextLine());
-        
+
         List<Supplier> suppliers = supplierService.getALLSuppliers();
         for (Supplier supplier : suppliers) {
             if (supplier.getIdSupplier() == id) {
@@ -149,9 +128,5 @@ public class SupplierUi {
             }
         }
         System.out.println("No encontrado");
-    }
-
-    public static void main(String[] args) {
-        new SupplierUi(new SupplierService()).showSupplierMenu();
     }
 }
