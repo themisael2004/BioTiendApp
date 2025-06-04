@@ -9,7 +9,8 @@ public abstract class Supplier {
     protected String supplierCountry;
     protected String supplierContact;
 
-    public Supplier (int idSupplier, String nameSupplier, String supplierDescription, String supplierDirection, String supplierCity, String supplierCountry, String supplierContact) {
+    public Supplier(int idSupplier, String nameSupplier, String supplierDescription, String supplierDirection,
+            String supplierCity, String supplierCountry, String supplierContact) {
         this.idSupplier = idSupplier;
         this.nameSupplier = nameSupplier;
         this.supplierDescription = supplierDescription;
@@ -21,23 +22,29 @@ public abstract class Supplier {
 
     public abstract String getDetails();
 
-    public int getIdSupplier() { return idSupplier; }
-    public void setIdSupplier(int idSupplier) { this.idSupplier = idSupplier; }
+    public int getIdSupplier() {
+        return idSupplier;
+    }
 
-    public String getNameSupplier() { return nameSupplier; }
-    public void setNameSupplier(String nameSupplier) { this.nameSupplier = nameSupplier; }   
-    
-    public String getSupplierDirection() { return supplierDirection; }
-    public void setSupplierDirection(String supplierDirection) { this.supplierDirection = supplierDirection; }
+    public String getNameSupplier() {
+        return nameSupplier;
+    }
 
-    public String getSupplierCity() { return supplierCity; }
-    public void setSupplierCity(String supplierCity) { this.supplierCity = supplierCity; }
-    
-    public String getSupplierCountry() { return supplierCountry; }
-    public void setSupplierCountry(String supplierCountry) { this.supplierCountry = supplierCountry; }
+    public String getSupplierDirection() {
+        return supplierDirection;
+    }
 
-    public String getSupplierContact() { return supplierContact; }
-    public void setSupplierContact(String supplierContact) { this.supplierContact = supplierContact; }
+    public String getSupplierCity() {
+        return supplierCity;
+    }
+
+    public String getSupplierCountry() {
+        return supplierCountry;
+    }
+
+    public String getSupplierContact() {
+        return supplierContact;
+    }
 
     @Override
     public String toString() {
