@@ -3,17 +3,17 @@ package model.Supplier;
 public abstract class Supplier {
     protected int idSupplier;
     protected String nameSupplier;
-    protected String supplierDescription;
+    protected String supplierProductType;
     protected String supplierDirection;
     protected String supplierCity;
     protected String supplierCountry;
     protected String supplierContact;
 
-    public Supplier(int idSupplier, String nameSupplier, String supplierDescription, String supplierDirection,
+    public Supplier(int idSupplier, String nameSupplier, String supplierProductType, String supplierDirection,
             String supplierCity, String supplierCountry, String supplierContact) {
         this.idSupplier = idSupplier;
         this.nameSupplier = nameSupplier;
-        this.supplierDescription = supplierDescription;
+        this.supplierProductType = supplierProductType;
         this.supplierDirection = supplierDirection;
         this.supplierCity = supplierCity;
         this.supplierCountry = supplierCountry;
@@ -46,12 +46,17 @@ public abstract class Supplier {
         return supplierContact;
     }
 
+    public String getSupplierProductType() {
+        return supplierProductType;
+    }
+
     @Override
     public String toString() {
         return "ID: " + idSupplier +
                 ", Nombre: " + nameSupplier +
                 ", Ciudad: " + supplierCity +
                 ", País: " + supplierCountry +
+                ", Producto suministrado: " + supplierProductType +
                 ", Contacto: " + supplierContact;
     }
 }

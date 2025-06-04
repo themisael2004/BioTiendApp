@@ -16,15 +16,15 @@ public class SupplierService {
         this.nextId = 1; 
     }
 
-    public void createLocalSupplier(String name, String description, String direction, String city,
+    public void createLocalSupplier(String name, String supplierProductType, String direction, String city,
             String country, String contact, String regionalCode) {
-        LocalSupplier local = new LocalSupplier(nextId++, name, description, direction, city, country, contact, regionalCode);
+        LocalSupplier local = new LocalSupplier(nextId++, name, supplierProductType, direction, city, country, contact, regionalCode);
         suppliers.add(local);
     }
 
-    public void createInternacionalSupplier(String name, String direction, String city, String country,
+    public void createInternacionalSupplier(String name, String supplierProductType, String city, String country,
             String contact, String isoCode) {
-        InternationalSupplier intl = new InternationalSupplier(nextId++, name, direction, city, country, contact, contact,
+        InternationalSupplier intl = new InternationalSupplier(nextId++, name, supplierProductType, city, country, contact, contact,
                 isoCode);
         suppliers.add(intl);
     }

@@ -3,9 +3,9 @@ package model.Supplier;
 public class LocalSupplier extends Supplier {
     private String regionalCode;
 
-    public LocalSupplier(int idSupplier, String nameSupplier, String supplierDescription, String supplierDirection,
+    public LocalSupplier(int idSupplier, String nameSupplier, String supplierProductType, String supplierDirection,
             String supplierCity, String supplierCountry, String supplierContact, String regionalCode) {
-        super(idSupplier, nameSupplier, supplierDescription, supplierDirection, supplierCity, supplierCountry,
+        super(idSupplier, nameSupplier, supplierProductType, supplierDirection, supplierCity, supplierCountry,
                 supplierContact);
         this.regionalCode = regionalCode;
     }

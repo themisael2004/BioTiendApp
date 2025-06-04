@@ -3,10 +3,10 @@ package model.Supplier;
 public class InternationalSupplier extends Supplier {
     private String isoCountryCode;
 
-    public InternationalSupplier(int idSupplier, String nameSupplier, String supplierDescription,
+    public InternationalSupplier(int idSupplier, String nameSupplier, String supplierProductType,
             String supplierDirection, String supplierCity, String supplierCountry, String supplierContact,
             String isoCountryCode) {
-        super(idSupplier, nameSupplier, supplierDescription, supplierDirection, supplierCity, supplierCountry,
+        super(idSupplier, nameSupplier, supplierProductType, supplierDirection, supplierCity, supplierCountry,
                 supplierContact);
         this.isoCountryCode = isoCountryCode;
     }
