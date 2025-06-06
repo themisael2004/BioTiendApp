@@ -1,9 +1,8 @@
 <h1 align="center">🌿 BioTiendApp</h1>
 
 <p align="center">
-  Proyecto final en Java para el módulo de <strong>Programación Orientada a Objetos</strong>.
-  <br>
-  Sistema de gestión simple para una tienda de alimentos orgánicos.
+  Proyecto final en Java para el módulo de <strong>Programación Orientada a Objetos</strong>.<br>
+  Sistema de gestión para una tienda de alimentos orgánicos.
 </p>
 
 ---
@@ -23,19 +22,49 @@
 
 ## 📄 Descripción
 
-Aplicación de consola que permite la <strong>gestión básica de productos proveedores y categorias</strong> para una tienda de alimentos orgánicos.
+BioTiendApp es una aplicación de consola que permite la <strong>gestión de productos y proveedores</strong> para una tienda de alimentos orgánicos.
 
-Funciones principales:
-- 🛒 Registrar nuevos productos (nombre, descripcion, categoría, ect.)
-- 🤝 Registrar y consultar proveedores
-- 🗂️ Registrar y gestionar categorías de productos
-- 📋 Ver listado de productos, categorias y proveedores registrados
+### Funciones principales:
+- 🛒 Registrar nuevos productos (nombre, tipo, proveedor, etc.)
+- 🤝 Registrar y consultar proveedores (locales e internacionales)
+- 📋 Ver listados de productos y proveedores registrados
 - 🖥️ Menú interactivo por consola
-- 🧱 Estructura basada en POO:
-  - Clase `Producto` (representación de productos)
-  - Clase `Proveedor` (modelo de datos del proveedor)
-  - Clase `Categoria`  (definición y gestión de categorías)
-  - Clase `MenuGeneral` (interfaz de usuario por consola)
+
+### 🧱 Arquitectura del proyecto
+
+```
+📦 BioTiendApp
+├── 📁 model
+│   ├── 📁 product
+│   │   ├── 🍎 Fruit.java
+│   │   ├── 🥦 Vegetable.java
+│   │   └── 🌿 OrganicProduct.java
+│   └── 📁 supplier
+│       ├── 🧍 Supplier.java
+│       ├── 🏠 LocalSupplier.java
+│       └── ✈️ InternationalSupplier.java
+├── 📁 services
+│   ├── 🛠️ SupplierService.java
+│   └── 🛠️ OrganicStoreService.java
+├── 📁 ui
+│   ├── 📋 GeneralMenu.java
+│   ├── 🛒 ProductUi.java
+│   └── 🤝 SupplierUi.java
+└── 🚀 App.java (Clase principal)
+```
+
+---
+
+## 🔄 Flujo de trabajo
+
+> ⚠️ **Nota importante:**  
+> Para poder registrar un producto correctamente, primero se debe registrar un proveedor.  
+> Esto se debe a que cada producto requiere un proveedor asociado al momento de su creación.
+
+Pasos recomendados:
+1. Registrar uno o más proveedores (local o internacional).
+2. Crear los productos, seleccionando un proveedor existente.
+3. Consultar o gestionar los elementos registrados desde el menú principal.
 
 ---
 
@@ -46,7 +75,7 @@ Funciones principales:
     <pre><code>git clone https://github.com/themisael2004/BioTiendApp.git</code></pre>
   </li>
   <li>🛠️ Compilar el proyecto con tu IDE preferido o desde consola:
-    <pre><code>javac BioTiendApp/src/*.java -d .</code></pre>
+    <pre><code>javac BioTiendApp/src/**/*.java -d .</code></pre>
   </li>
   <li>▶️ Ejecutar la clase principal:
     <pre><code>java App</code></pre>
