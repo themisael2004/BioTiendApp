@@ -1,43 +1,59 @@
 package model.Product;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class Vegetables extends OrganicProduct {
+
+public class Vegetable extends OrganicProduct {
+
+    // Atributos específicos de los vegetales
+    /** Tipo de vegetal (Raíz, Hoja, Tallo) que determina el incremento de precio */
     private String vegetableType;
+    /** Días de frescura del vegetal, usado para aplicar descuentos */
     private int freshnessDays;
 
-    public Vegetables(int idProduct, String nameProduct, String descriptionProduct, int idSupplier,
-                      LocalDateTime dateAdmission, String type, double price, String vegetableType, int freshnessDays) {
-        super(idProduct, nameProduct, descriptionProduct, idSupplier, dateAdmission, type, price);
+    public Vegetable(int idProduct, String nameProduct, int idSupplier,
+                     LocalDateTime dateAdmission, String type, double price, String vegetableType, int freshnessDays) {
+        // Llamada al constructor de la clase padre
+        super(idProduct, nameProduct, idSupplier, dateAdmission, type, price);
         this.vegetableType = vegetableType;
         this.freshnessDays = freshnessDays;
     }
 
+    @Override
     public double calculateSalePrice() {
+        double incrementPercentage = 0.0;
 
-        double salePrice = this.getPrice() * 1.15;
-        if (freshnessDays >= 1 && freshnessDays <= 5) {
-            salePrice *= 0.95;
+        // Determinar incremento según el tipo de vegetal
+        if (vegetableType.equalsIgnoreCase("Raiz")) {
+            incrementPercentage = 0.10; // 10% de incremento para vegetales de raíz
+        } else if (vegetableType.equalsIgnoreCase("Hoja")) {
+            incrementPercentage = 0.05; // 5% de incremento para vegetales de hoja
+        } else if (vegetableType.equalsIgnoreCase("Tallo")) {
+            incrementPercentage = 0.15; // 15% de incremento para vegetales de tallo
         }
-        return salePrice;
-    }
 
-    public double applyDiscount() {
-        double currentPrice = this.calculateSalePrice();
+        // Aplicar incremento al precio base
+        double priceWithIncrement = this.price * (1 + incrementPercentage);
 
-        if (freshnessDays > 5) {
-            return currentPrice * 0.70;
-        }
-        return currentPrice;
+        // Aplicar IVA al precio con incremento
+        double finalPrice = priceWithIncrement * IVA;
 
+        return finalPrice;
     }
 
     @Override
-    public String getDetails() {
-        return super.toString() +
-                "| Tipo: Verdura" +
-                "| Verdura: " + vegetableType +
-                "| Dias frescura: " + freshnessDays;
+    public double applyDiscount(double currentPrice) {
+        if (freshnessDays <= 3) {
+            // Producto muy fresco, sin descuento
+            return currentPrice;
+        } else if (freshnessDays <= 7) {
+            // Descuento del 15% para productos moderadamente frescos
+            return currentPrice * PAY_85_PERCENT;
+        } else {
+            // Descuento del 30% para productos menos frescos
+            return currentPrice * PAY_70_PERCENT;
+        }
     }
 
     public String getVegetableType() {
@@ -46,5 +62,36 @@ public class Vegetables extends OrganicProduct {
 
     public int getFreshnessDays() {
         return freshnessDays;
+    }
+
+    @Override
+    public String getDetails() {
+        // Formateador para mostrar fecha en formato legible
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+        String formattedDateAdmission = dateAdmission.format(formatter);
+
+        // Calcular precios para mostrar en el reporte
+        double salePrice = calculateSalePrice();
+        double priceWithDiscount = applyDiscount(salePrice);
+
+        // Retornar reporte detallado formateado
+        return """
+
+                -------------------------------------
+                        Detalle del producto
+                -------------------------------------
+                 %s
+                 Nombre producto: %s
+                 Tipo de verdura: %s
+                 Categoría: Verdura
+                 Días de frescura: %d
+                 Tipo: %s
+                 Proveedor ID: %d
+                 Fecha de admisión: %s
+                 Precio base: %.2f
+                 Precio de venta (con IVA): %.2f
+                 Precio con descuento (con IVA): %.2f
+                 """.formatted(super.toString(),nameProduct,vegetableType, freshnessDays, type, idSupplier, formattedDateAdmission,
+                price, salePrice, priceWithDiscount);
     }
 }
