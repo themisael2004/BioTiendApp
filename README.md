@@ -71,15 +71,21 @@ Pasos recomendados:
 ## 🚀 Cómo ejecutar
 
 <ol>
-  <li>📥 Clonar el repositorio:
-    <pre><code>git clone https://github.com/themisael2004/BioTiendApp.git</code></pre>
-  </li>
-  <li>🛠️ Compilar el proyecto con tu IDE preferido o desde consola:
-    <pre><code>javac BioTiendApp/src/**/*.java -d .</code></pre>
-  </li>
-  <li>▶️ Ejecutar la clase principal:
-    <pre><code>java App</code></pre>
-  </li>
+  <li>📥 **Clonar el repositorio:**
+    <pre><code>git clone https://github.com/themisael2004/BioTiendApp.git</code></pre>
+    <pre><code>cd BioTiendApp</code></pre>
+    *(Asegúrate de navegar al directorio raíz del proyecto después de clonarlo.)*
+  </li>
+  <li>🛠️ **Compilar el proyecto desde consola:**
+    <br>
+    *(Este comando compilará todos los archivos `.java` dentro de la carpeta `src` y sus subdirectorios, colocando los archivos `.class` resultantes en la carpeta `bin`.)*
+    <pre><code>find src -name "*.java" -print0 | xargs -0 javac -d bin</code></pre>
+  </li>
+  <li>▶️ **Ejecutar la clase principal:**
+    <br>
+    *(Este comando ejecutará la aplicación, indicando a la Java Virtual Machine (JVM) que busque las clases compiladas en el directorio `bin`.)*
+    <pre><code>java -cp bin App</code></pre>
+  </li>
 </ol>
 
 ---
