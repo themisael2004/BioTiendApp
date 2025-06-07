@@ -29,6 +29,15 @@ public class SupplierService {
         suppliers.add(intl);
     }
 
+    public Supplier getSupplierById(int id) {
+        for (Supplier o : suppliers) {
+            if (o.getIdSupplier() == id) {
+                return o;
+            }
+        }
+        return null;
+    }
+
     public List<Supplier> getALLSuppliers() {
        return new ArrayList<>(suppliers);
     }

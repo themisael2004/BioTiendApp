@@ -39,7 +39,6 @@ public class SupplierUi {
                     System.out.println("Opción inválida. Por favor, intente de nuevo.");
             }
         } while (choice != 0);
-        scanner.close();
     }
 
     private void displayMenu() {

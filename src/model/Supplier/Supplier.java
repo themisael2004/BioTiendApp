@@ -52,11 +52,6 @@ public abstract class Supplier {
 
     @Override
     public String toString() {
-        return "ID: " + idSupplier +
-                ", Nombre: " + nameSupplier +
-                ", Ciudad: " + supplierCity +
-                ", País: " + supplierCountry +
-                ", Producto suministrado: " + supplierProductType +
-                ", Contacto: " + supplierContact;
+        return "ID proveedor: " + idSupplier;
     }
 }

@@ -11,13 +11,6 @@ public class InternationalSupplier extends Supplier {
         this.isoCountryCode = isoCountryCode;
     }
 
-    @Override
-    public String getDetails() {
-        return super.toString() +
-                ", Tipo: Local" +
-                ", Codigo regional: " + isoCountryCode;
-    }
-
     public String getisoCountryCode() {
         return isoCountryCode;
     }
@@ -26,4 +19,21 @@ public class InternationalSupplier extends Supplier {
         this.isoCountryCode = isoCountryCode;
     }
 
+    @Override
+    public String getDetails() {
+        return """
+                -------------------------------------
+                        Detalle del Proveedor
+                -------------------------------------
+                %s
+                Nombre proveedor: %s
+                Tipo: Internacional
+                Pais: %s
+                Codigo de pais: %s
+                Ciudad: %s
+                Producto suministrado: %s
+                Contacto: %s
+                """.formatted(super.toString(), nameSupplier, supplierCountry, isoCountryCode, supplierCity,
+                supplierProductType, supplierContact);
+    }
 }

@@ -10,18 +10,25 @@ public class LocalSupplier extends Supplier {
         this.regionalCode = regionalCode;
     }
 
-    @Override
-    public String getDetails() {
-        return super.toString() +
-                ", Tipo: Local" +
-                ", Codigo regional: " + regionalCode;
-    }
-
     public String getRegionalCode() {
         return regionalCode;
     }
 
-    public void setRegionalCode(String regionalCode) {
-        this.regionalCode = regionalCode;
+    @Override
+    public String getDetails() {
+        return """
+                -------------------------------------
+                        Detalle del Proveedor
+                -------------------------------------
+                %s
+                Nombre proveedor: %s
+                Tipo: Local
+                Pais: %s
+                Codigo de pais: %s
+                Ciudad: %s
+                Producto suministrado: %s
+                Contacto: %s
+                """.formatted(super.toString(), nameSupplier, supplierCountry, regionalCode, supplierCity,
+                supplierProductType, supplierContact);
     }
 }
