@@ -3,19 +3,21 @@ package model.Product;
 import java.time.LocalDateTime;
 
 public abstract class OrganicProduct {
+    protected static final double IVA = 1.12; /** Constante para aplicar IVA del 12% (1.00 + 0.12) */
+    protected static final double PAY_85_PERCENT = 0.85; /** Constante para aplicar descuento del 15% (pagar 85%) */
+    protected static final double PAY_70_PERCENT = 0.70; /** Constante para aplicar descuento del 30% (pagar 70%) */
+
     protected int idProduct;
     protected String nameProduct;
-    protected String descriptionProduct;
     protected int idSupplier;
     protected LocalDateTime dateAdmission;
     protected double price;
     protected String type;
 
-    public OrganicProduct(int idProduct, String nameProduct, String descriptionProduct, int idSupplier,
-            LocalDateTime dateAdmission, String type, double price) {
+    public OrganicProduct(int idProduct, String nameProduct, int idSupplier,
+                          LocalDateTime dateAdmission, String type, double price) {
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
-        this.descriptionProduct = descriptionProduct;
         this.idSupplier = idSupplier;
         this.dateAdmission = dateAdmission;
         this.type = type;
@@ -23,7 +25,8 @@ public abstract class OrganicProduct {
     }
 
     public abstract String getDetails();
-
+    public abstract double calculateSalePrice();
+    public abstract double applyDiscount(double currentPrice);
 
     public int getIdProduct() {
         return idProduct;
@@ -31,10 +34,6 @@ public abstract class OrganicProduct {
 
     public String getNameProduct() {
         return nameProduct;
-    }
-
-    public String getDescriptionProduct() {
-        return descriptionProduct;
     }
 
     public int getIdSupplier() {
@@ -55,9 +54,7 @@ public abstract class OrganicProduct {
 
     @Override
     public String toString() {
-        return "Product [idProduct=" + idProduct + ", nameProduct=" + nameProduct + ", descriptionProduct="
-                + descriptionProduct + ", idSupplier=" + idSupplier + ", dateAdmission=" + dateAdmission + ", price="
-                + price + ", type=" + type + "]";
+        return "ID Producto: " + idProduct;
     }
 
 }
