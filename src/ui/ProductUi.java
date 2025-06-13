@@ -10,19 +10,20 @@ import services.OrganicStoreServices;
 import services.SupplierService;
 
 // Clase de interfaz de usuario para la gestión de productos orgánicos.
- 
+
 public class ProductUi {
-    
+
     // Servicio para gestionar productos orgánicos */
     private OrganicStoreServices organicStoreServices;
-    
+
     // Servicio para gestionar proveedores */
     private SupplierService supplierService;
-    
+
     // Scanner para capturar entrada del usuario desde consola */
     private Scanner scanner;
 
-    // Constructor que inicializa la interfaz de usuario con los servicios necesarios.
+    // Constructor que inicializa la interfaz de usuario con los servicios
+    // necesarios.
     public ProductUi(OrganicStoreServices organicStoreServices, SupplierService supplierService) {
         this.supplierService = supplierService;
         this.organicStoreServices = organicStoreServices;
@@ -57,9 +58,7 @@ public class ProductUi {
         } while (option != 0); // Continuar hasta que el usuario elija salir
     }
 
-    /**
-     * Muestra el menú principal de opciones para gestión de productos.
-     */
+    // Muestra el menú principal de opciones para gestión de productos.
     public void displayMenu() {
         System.out.println("\n--- Menú Principal de Gestión de Productos ---");
         System.out.println("1. Crear Nuevo Producto");
@@ -69,10 +68,7 @@ public class ProductUi {
         System.out.print("Seleccione una opción: ");
     }
 
-    /**
-     * Captura y valida la opción seleccionada por el usuario.
-     * Maneja excepciones de entrada para evitar crashes por datos inválidos.
-     */
+    // Captura y valida la opción seleccionada por el usuario.
     private int getUserOption() {
         try {
             int option = scanner.nextInt();
@@ -85,11 +81,7 @@ public class ProductUi {
         }
     }
 
-    /**
-     * Flujo completo para crear un nuevo producto orgánico.
-     * Solicita todos los datos necesarios al usuario, los valida
-     * y crea el producto a través del servicio correspondiente.
-     */
+    // Flujo para crear un nuevo producto orgánico.
     public void createProductFlow() {
         System.out.println("\n--- Crear Nuevo Producto ---");
 
@@ -174,7 +166,7 @@ public class ProductUi {
 
         // Establecer fecha de admisión como el momento actual
         LocalDateTime dateAdmission = LocalDateTime.now();
-        
+
         // Crear el producto a través del servicio
         organicStoreServices.createProduct(typeProduct, nameProduct, idSupplier,
                 dateAdmission, "Orgánico", price, specificType, freshnessDays);
@@ -182,14 +174,12 @@ public class ProductUi {
         System.out.println("Producto creado exitosamente.");
     }
 
-    /**
-     * Flujo para listar todos los productos orgánicos registrados.
-     * Obtiene la lista completa del servicio y muestra los detalles de cada producto.
-     */
+    // Flujo para listar todos los productos orgánicos registrados.
+
     private void listAllOrganicProductFlow() {
         System.out.println("\n--- Listado de Todos los Productos ---");
         List<OrganicProduct> allOrganicProducts = organicStoreServices.getAllOrganicProducts();
-        
+
         // Verificar si existen productos registrados
         if (allOrganicProducts.isEmpty()) {
             System.out.println("No hay productos registrados.");
@@ -201,10 +191,7 @@ public class ProductUi {
         }
     }
 
-    /**
-     * Flujo para eliminar un producto del inventario.
-     * Solicita el nombre del producto y lo elimina a través del servicio.
-     */
+    // Flujo para eliminar un producto del inventario.
     public void deleteOrganicProductFlow() {
         System.out.println("\n--- Eliminar Producto ---");
         System.out.print("Ingrese el nombre del producto a eliminar: ");
@@ -212,7 +199,7 @@ public class ProductUi {
 
         // Intentar eliminar el producto
         OrganicProduct deletedProduct = organicStoreServices.deleteOrganicProduct(nameProduct);
-        
+
         // Informar resultado de la operación
         if (deletedProduct != null) {
             System.out.println("Producto eliminado: " + deletedProduct.getNameProduct());

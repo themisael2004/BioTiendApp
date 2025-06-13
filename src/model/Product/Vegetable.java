@@ -3,55 +3,56 @@ package model.Product;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * Clase que representa un producto vegetal (subtipo de OrganicProduct)
+ */
 public class Vegetable extends OrganicProduct {
 
-    // Atributos específicos de los vegetales
-    /** Tipo de vegetal (Raíz, Hoja, Tallo) que determina el incremento de precio */
+    // Tipo de vegetal (Raíz, Hoja, Tallo)
     private String vegetableType;
-    /** Días de frescura del vegetal, usado para aplicar descuentos */
+
+    // Días desde la admisión, usados para calcular descuentos
     private int freshnessDays;
 
     public Vegetable(int idProduct, String nameProduct, int idSupplier,
-                     LocalDateTime dateAdmission, String type, double price, String vegetableType, int freshnessDays) {
-        // Llamada al constructor de la clase padre
+            LocalDateTime dateAdmission, String type, double price,
+            String vegetableType, int freshnessDays) {
         super(idProduct, nameProduct, idSupplier, dateAdmission, type, price);
         this.vegetableType = vegetableType;
         this.freshnessDays = freshnessDays;
     }
 
+    /**
+     * Calcula el precio de venta con incremento según el tipo de vegetal y aplica
+     * IVA
+     */
     @Override
     public double calculateSalePrice() {
         double incrementPercentage = 0.0;
 
-        // Determinar incremento según el tipo de vegetal
+        // Incrementos personalizados según tipo
         if (vegetableType.equalsIgnoreCase("Raiz")) {
-            incrementPercentage = 0.10; // 10% de incremento para vegetales de raíz
+            incrementPercentage = 0.10;
         } else if (vegetableType.equalsIgnoreCase("Hoja")) {
-            incrementPercentage = 0.05; // 5% de incremento para vegetales de hoja
+            incrementPercentage = 0.05;
         } else if (vegetableType.equalsIgnoreCase("Tallo")) {
-            incrementPercentage = 0.15; // 15% de incremento para vegetales de tallo
+            incrementPercentage = 0.15;
         }
 
-        // Aplicar incremento al precio base
         double priceWithIncrement = this.price * (1 + incrementPercentage);
-
-        // Aplicar IVA al precio con incremento
-        double finalPrice = priceWithIncrement * IVA;
-
-        return finalPrice;
+        return priceWithIncrement * IVA;
     }
 
+    /**
+     * Aplica descuentos según la frescura
+     */
     @Override
     public double applyDiscount(double currentPrice) {
         if (freshnessDays <= 3) {
-            // Producto muy fresco, sin descuento
             return currentPrice;
         } else if (freshnessDays <= 7) {
-            // Descuento del 15% para productos moderadamente frescos
             return currentPrice * PAY_85_PERCENT;
         } else {
-            // Descuento del 30% para productos menos frescos
             return currentPrice * PAY_70_PERCENT;
         }
     }
@@ -64,19 +65,19 @@ public class Vegetable extends OrganicProduct {
         return freshnessDays;
     }
 
+    /**
+     * Muestra todos los detalles relevantes del vegetal, incluyendo precios y
+     * descuentos
+     */
     @Override
     public String getDetails() {
-        // Formateador para mostrar fecha en formato legible
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
-        String formattedDateAdmission = dateAdmission.format(formatter);
+        String formattedDate = dateAdmission.format(formatter);
 
-        // Calcular precios para mostrar en el reporte
         double salePrice = calculateSalePrice();
         double priceWithDiscount = applyDiscount(salePrice);
 
-        // Retornar reporte detallado formateado
         return """
-
                 -------------------------------------
                         Detalle del producto
                 -------------------------------------
@@ -91,7 +92,8 @@ public class Vegetable extends OrganicProduct {
                  Precio base: %.2f
                  Precio de venta (con IVA): %.2f
                  Precio con descuento (con IVA): %.2f
-                 """.formatted(super.toString(),nameProduct,vegetableType, freshnessDays, type, idSupplier, formattedDateAdmission,
-                price, salePrice, priceWithDiscount);
+                 """.formatted(
+                super.toString(), nameProduct, vegetableType, freshnessDays,
+                type, idSupplier, formattedDate, price, salePrice, priceWithDiscount);
     }
 }
