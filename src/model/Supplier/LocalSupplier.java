@@ -10,8 +10,9 @@ public class LocalSupplier extends Supplier {
      * Constructor con todos los datos del proveedor local.
      */
     public LocalSupplier(int idSupplier, String nameSupplier, String supplierProductType, String supplierDirection,
-                         String supplierCity, String supplierCountry, String supplierContact, String regionalCode) {
-        super(idSupplier, nameSupplier, supplierProductType, supplierDirection, supplierCity, supplierCountry, supplierContact);
+            String supplierCity, String supplierCountry, String supplierContact, String regionalCode) {
+        super(idSupplier, nameSupplier, supplierProductType, supplierDirection, supplierCity, supplierCountry,
+                supplierContact);
         this.regionalCode = regionalCode;
     }
 

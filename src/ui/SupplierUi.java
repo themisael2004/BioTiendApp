@@ -7,10 +7,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Clase encargada de interactuar con el usuario para gestionar proveedores
- * mediante un menú por consola.
- */
+// Clase de interfaz de usuario para la gestión de proveedores.
 public class SupplierUi {
     // Servicio que contiene la lógica de gestión de proveedores
     private final SupplierService supplierService;
@@ -18,17 +15,13 @@ public class SupplierUi {
     // Scanner para capturar entradas del usuario por consola
     private final Scanner scanner;
 
-    /**
-     * Constructor que inicializa la interfaz con el servicio de proveedores
-     */
+    // Constructor que inicializa la interfaz con el servicio de proveedores
     public SupplierUi(SupplierService supplierService) {
         this.supplierService = supplierService;
         this.scanner = new Scanner(System.in);
     }
 
-    /**
-     * Método principal que ejecuta el menú interactivo hasta que el usuario decida salir
-     */
+    // Método principal que ejecuta el menú interactivo hasta que el usuario decida
     public void runSupplierMenu() {
         int choice;
         do {
@@ -54,9 +47,7 @@ public class SupplierUi {
         } while (choice != 0);
     }
 
-    /**
-     * Muestra el menú de opciones en consola
-     */
+    // Muestra el menú de opciones en consola
     private void displayMenu() {
         System.out.println("\n--- Menú Principal de Gestión de Proveedores ---");
         System.out.println("1. Crear Nuevo Proveedor");
@@ -66,9 +57,7 @@ public class SupplierUi {
         System.out.print("Seleccione una opción: ");
     }
 
-    /**
-     * Flujo de creación de un nuevo proveedor (local o internacional)
-     */
+    // Flujo de creación de un nuevo proveedor (local o internacional)
     private void createSupplierFlow() {
         System.out.println("\n--- Crear Nuevo Proveedor ---");
 
@@ -99,28 +88,24 @@ public class SupplierUi {
             String isoCountryCode = scanner.nextLine();
 
             supplierService.createInternacionalSupplier(
-                name, supplierProductType, direction, city, country, contact, isoCountryCode
-            );
+                    name, supplierProductType, direction, city, country, contact, isoCountryCode);
 
-        // Proveedor local
+            // Proveedor local
         } else if (typeChoice.equalsIgnoreCase("L")) {
             System.out.print("Código regional: ");
             String regionalCode = scanner.nextLine();
 
             supplierService.createLocalSupplier(
-                name, supplierProductType, direction, city, country, contact, regionalCode
-            );
+                    name, supplierProductType, direction, city, country, contact, regionalCode);
 
-        // Entrada inválida
+            // Entrada inválida
         } else {
             System.out.println("Tipo de proveedor inválido. El proveedor no fue creado.");
         }
     }
 
-    /**
-     * Lee la opción numérica ingresada por el usuario, validando errores
-     * @return número ingresado o -1 si hay error
-     */
+    // Lee la opción numérica ingresada por el usuario, validando errores
+
     private int getUserChoice() {
         try {
             int choice = scanner.nextInt();
@@ -133,9 +118,7 @@ public class SupplierUi {
         }
     }
 
-    /**
-     * Muestra todos los proveedores registrados en el sistema
-     */
+    // Muestra todos los proveedores registrados en el sistema
     private void listAllSuppliersFlow() {
         System.out.println("\n--- Listado de Todos los Proveedores ---");
         List<Supplier> allSuppliers = supplierService.getALLSuppliers();
@@ -149,9 +132,8 @@ public class SupplierUi {
         }
     }
 
-    /**
-     * Permite buscar un proveedor por su ID
-     */
+    // Permite buscar un proveedor por su ID
+
     private void searchById() {
         System.out.print("ID a buscar: ");
         int id = Integer.parseInt(scanner.nextLine());

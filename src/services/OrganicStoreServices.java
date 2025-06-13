@@ -49,7 +49,7 @@ public class OrganicStoreServices {
         }
     }
 
-    //Metodo para obtener todo los productos
+    // Metodo para obtener todo los productos
     public List<OrganicProduct> getAllOrganicProducts() {
         // Retorna una nueva lista para evitar modificaciones externas del inventario
         return new ArrayList<>(inventory);
@@ -57,7 +57,7 @@ public class OrganicStoreServices {
 
     // Metodo para buscar un producto por su ID
     public OrganicProduct getOrganicProductById(int id) {
-          // Búsqueda lineal por ID
+        // Búsqueda lineal por ID
         for (OrganicProduct o : inventory) {
             if (o.getIdProduct() == id) {
                 return o; // Producto encontrado
@@ -68,7 +68,7 @@ public class OrganicStoreServices {
 
     // Método para eliminar un producto por su nombre
     public OrganicProduct deleteOrganicProduct(String name) {
-         // Usar Iterator para eliminación segura durante iteración
+        // Usar Iterator para eliminación segura durante iteración
         Iterator<OrganicProduct> iterator = inventory.iterator();
         while (iterator.hasNext()) {
             OrganicProduct p = iterator.next();
