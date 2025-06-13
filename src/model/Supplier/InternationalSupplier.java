@@ -10,9 +10,10 @@ public class InternationalSupplier extends Supplier {
      * Constructor con todos los datos del proveedor internacional.
      */
     public InternationalSupplier(int idSupplier, String nameSupplier, String supplierProductType,
-                                 String supplierDirection, String supplierCity, String supplierCountry,
-                                 String supplierContact, String isoCountryCode) {
-        super(idSupplier, nameSupplier, supplierProductType, supplierDirection, supplierCity, supplierCountry, supplierContact);
+            String supplierDirection, String supplierCity, String supplierCountry,
+            String supplierContact, String isoCountryCode) {
+        super(idSupplier, nameSupplier, supplierProductType, supplierDirection, supplierCity, supplierCountry,
+                supplierContact);
         this.isoCountryCode = isoCountryCode;
     }
 
@@ -43,6 +44,6 @@ public class InternationalSupplier extends Supplier {
                 Contacto: %s
                 """.formatted(super.toString(), nameSupplier, supplierCountry, isoCountryCode, supplierCity,
                 supplierProductType, supplierContact);
-    
+
     }
 }

@@ -42,7 +42,7 @@ public abstract class OrganicProduct {
 
     public abstract double applyDiscount(double currentPrice);
 
-    // Getters 
+    // Getters
     public int getIdProduct() {
         return idProduct;
     }

@@ -15,8 +15,8 @@ public class Fruit extends OrganicProduct {
     private int freshnessDays;
 
     public Fruit(int idProduct, String nameProduct, int idSupplier,
-                 LocalDateTime dateAdmission, String type, double price,
-                 String fruitType, int freshnessDays) {
+            LocalDateTime dateAdmission, String type, double price,
+            String fruitType, int freshnessDays) {
         super(idProduct, nameProduct, idSupplier, dateAdmission, type, price);
         this.fruitType = fruitType;
         this.freshnessDays = freshnessDays;
@@ -55,11 +55,17 @@ public class Fruit extends OrganicProduct {
         }
     }
 
-    public String getFruitType() { return fruitType; }
-    public int getFreshnessDays() { return freshnessDays; }
+    public String getFruitType() {
+        return fruitType;
+    }
+
+    public int getFreshnessDays() {
+        return freshnessDays;
+    }
 
     /**
-     * Muestra todos los detalles relevantes de la fruta, incluyendo precios y descuentos
+     * Muestra todos los detalles relevantes de la fruta, incluyendo precios y
+     * descuentos
      */
     @Override
     public String getDetails() {
@@ -86,7 +92,6 @@ public class Fruit extends OrganicProduct {
                  Precio con descuento (con IVA): %.2f
                  """.formatted(
                 super.toString(), nameProduct, fruitType, freshnessDays,
-                type, idSupplier, formattedDate, price, salePrice, priceWithDiscount
-        );
+                type, idSupplier, formattedDate, price, salePrice, priceWithDiscount);
     }
 }

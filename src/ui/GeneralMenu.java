@@ -8,9 +8,9 @@ import java.util.Scanner;
  * Permite acceder a gestión de proveedores y productos.
  */
 public class GeneralMenu {
-    private ProductUi productUi;   // Gestión de productos
+    private ProductUi productUi; // Gestión de productos
     private SupplierUi supplierUi; // Gestión de proveedores
-    private Scanner scanner;       // Entrada por consola
+    private Scanner scanner; // Entrada por consola
     private boolean logoShown = false; // Control para mostrar logo solo una vez
 
     public GeneralMenu(ProductUi productUi, SupplierUi supplierUi) {
@@ -73,4 +73,3 @@ public class GeneralMenu {
                 """;
     }
 }
-

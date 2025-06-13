@@ -10,7 +10,6 @@ import services.OrganicStoreServices;
 import services.SupplierService;
 
 // Clase de interfaz de usuario para la gestión de productos orgánicos.
-
 public class ProductUi {
 
     // Servicio para gestionar productos orgánicos */
