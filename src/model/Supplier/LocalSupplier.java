@@ -1,12 +1,17 @@
 package model.Supplier;
 
+/**
+ * Representa un proveedor local con un código regional.
+ */
 public class LocalSupplier extends Supplier {
     private String regionalCode;
 
+    /**
+     * Constructor con todos los datos del proveedor local.
+     */
     public LocalSupplier(int idSupplier, String nameSupplier, String supplierProductType, String supplierDirection,
-            String supplierCity, String supplierCountry, String supplierContact, String regionalCode) {
-        super(idSupplier, nameSupplier, supplierProductType, supplierDirection, supplierCity, supplierCountry,
-                supplierContact);
+                         String supplierCity, String supplierCountry, String supplierContact, String regionalCode) {
+        super(idSupplier, nameSupplier, supplierProductType, supplierDirection, supplierCity, supplierCountry, supplierContact);
         this.regionalCode = regionalCode;
     }
 
@@ -14,6 +19,9 @@ public class LocalSupplier extends Supplier {
         return regionalCode;
     }
 
+    /**
+     * Devuelve una descripción detallada del proveedor local.
+     */
     @Override
     public String getDetails() {
         return """
@@ -23,8 +31,8 @@ public class LocalSupplier extends Supplier {
                 %s
                 Nombre proveedor: %s
                 Tipo: Local
-                Pais: %s
-                Codigo de pais: %s
+                País: %s
+                Código de país: %s
                 Ciudad: %s
                 Producto suministrado: %s
                 Contacto: %s
