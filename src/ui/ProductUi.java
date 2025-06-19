@@ -9,55 +9,44 @@ import model.Product.OrganicProduct;
 import services.OrganicStoreServices;
 import services.SupplierService;
 
-// Clase de interfaz de usuario para la gestión de productos orgánicos.
+// Clase que representa la interfaz de usuario para gestionar productos orgánicos
 public class ProductUi {
 
-    // Servicio para gestionar productos orgánicos */
-    private OrganicStoreServices organicStoreServices;
+    private OrganicStoreServices organicStoreServices; // Servicio de productos
+    private SupplierService supplierService; // Servicio de proveedores
+    private Scanner scanner; // Entrada por consola
 
-    // Servicio para gestionar proveedores */
-    private SupplierService supplierService;
-
-    // Scanner para capturar entrada del usuario desde consola */
-    private Scanner scanner;
-
-    // Constructor que inicializa la interfaz de usuario con los servicios
-    // necesarios.
+    // Constructor que inicializa los servicios requeridos
     public ProductUi(OrganicStoreServices organicStoreServices, SupplierService supplierService) {
         this.supplierService = supplierService;
         this.organicStoreServices = organicStoreServices;
         this.scanner = new Scanner(System.in);
     }
 
-    // Método principal que ejecuta el menú de productos.
+    // Método que ejecuta el menú de productos
     public void runProductMenu() {
         int option;
         do {
-            displayMenu(); // Mostrar opciones disponibles
-            option = getUserOption(); // Capturar selección del usuario
+            ConsoleUtils.clearConsole(); // Limpia consola
+            displayMenu(); // Muestra opciones
+            option = getUserOption(); // Captura opción
 
-            // Procesar la opción seleccionada
             switch (option) {
-                case 1:
-                    createProductFlow(); // Crear nuevo producto
-                    break;
-                case 2:
-                    listAllOrganicProductFlow(); // Listar todos los productos
-                    break;
-                case 3:
-                    deleteOrganicProductFlow(); // Eliminar producto
-                    break;
-                case 0:
-                    System.out.println("Volviendo al menú principal...");
-                    break;
-                default:
-                    System.out.println("Opción inválida, por favor intente nuevamente.");
-                    break;
+                case 1 -> createProductFlow(); // Crear nuevo producto
+                case 2 -> listAllOrganicProductFlow(); // Listar productos
+                case 3 -> deleteOrganicProductFlow(); // Eliminar producto
+                case 0 -> System.out.println("Volviendo al menú principal...");
+                default -> System.out.println("Opción inválida, por favor intente nuevamente.");
             }
-        } while (option != 0); // Continuar hasta que el usuario elija salir
+
+             if (option != 0) {
+                System.out.println("Presione Enter para continuar...");
+                scanner.nextLine(); // Espera que el usuario presione Enter
+            }
+        } while (option != 0);
     }
 
-    // Muestra el menú principal de opciones para gestión de productos.
+    // Muestra el menú de opciones en consola
     public void displayMenu() {
         System.out.println("\n--- Menú Principal de Gestión de Productos ---");
         System.out.println("1. Crear Nuevo Producto");
@@ -67,24 +56,24 @@ public class ProductUi {
         System.out.print("Seleccione una opción: ");
     }
 
-    // Captura y valida la opción seleccionada por el usuario.
+    // Obtiene y valida la opción ingresada por el usuario
     private int getUserOption() {
         try {
             int option = scanner.nextInt();
-            scanner.nextLine(); // Limpiar buffer de entrada
+            scanner.nextLine(); // Limpia buffer
             return option;
         } catch (InputMismatchException e) {
             System.out.println("Entrada inválida. Por favor, ingrese una opción válida.");
-            scanner.nextLine(); // Limpiar buffer tras excepción
-            return -1; // Retornar valor que active el default del switch
+            scanner.nextLine();
+            return -1;
         }
     }
 
-    // Flujo para crear un nuevo producto orgánico.
+    // Flujo para crear un nuevo producto
     public void createProductFlow() {
+        ConsoleUtils.clearConsole();
         System.out.println("\n--- Crear Nuevo Producto ---");
 
-        // Determinar tipo de producto (Fruta o Vegetal)
         System.out.print("Tipo de Producto (Fruta(F) / Verdura(V)): ");
         String typeProductInput = scanner.nextLine().toUpperCase();
 
@@ -95,111 +84,112 @@ public class ProductUi {
             typeProduct = "Vegetal";
         } else {
             System.out.println("Tipo de producto inválido. El producto no fue creado.");
-            return; // Salir del método si el tipo no es válido
+            return;
         }
 
-        // Solicitar tipo específico según el producto
+        // Solicita tipo específico
         String specificType;
         if (typeProduct.equals("Fruta")) {
-            System.out.print("Tipo de Fruta (Ej. Tropicales, Citricos, Drupas): ");
+            System.out.print("Tipo de Fruta (Ej. Tropicales, Cítricos, Drupas): ");
         } else {
-            System.out.print("Tipo de Verdura (Ej. Raiz, Hoja, Tallo): ");
+            System.out.print("Tipo de Verdura (Ej. Raíz, Hoja, Tallo): ");
         }
         specificType = scanner.nextLine();
 
-        // Capturar nombre del producto
         System.out.print("Nombre del Producto: ");
         String nameProduct = scanner.nextLine();
 
-        // Validar y capturar ID del proveedor
+        // Validación del ID de proveedor
         int idSupplier = -1;
         boolean validInput = false;
         while (!validInput) {
             try {
                 System.out.print("ID del Proveedor: ");
                 idSupplier = scanner.nextInt();
-                scanner.nextLine(); // Limpiar buffer
+                scanner.nextLine();
 
-                // Verificar que el proveedor existe
                 model.Supplier.Supplier supplier = supplierService.getSupplierById(idSupplier);
                 if (supplier == null) {
                     System.out.println("El ID del proveedor ingresado no existe.");
                 } else {
-                    validInput = true; // Proveedor válido encontrado
+                    validInput = true;
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
-                scanner.nextLine(); // Limpiar buffer tras excepción
+                scanner.nextLine();
             }
         }
 
-        // Validar y capturar precio del producto
+        // Validación: precio debe ser mayor a 0
         double price = -1;
         validInput = false;
         while (!validInput) {
             try {
                 System.out.print("Precio del Producto: ");
                 price = scanner.nextDouble();
-                scanner.nextLine(); // Limpiar buffer
-                validInput = true;
+                scanner.nextLine();
+                if (price <= 0) {
+                    System.out.println("El precio debe ser mayor que 0.");
+                } else {
+                    validInput = true;
+                }
             } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida. Por favor, ingrese un número válido.");
-                scanner.nextLine(); // Limpiar buffer tras excepción
+                System.out.println("Entrada inválida. Ingrese un número decimal.");
+                scanner.nextLine();
             }
         }
 
-        // Validar y capturar días de frescura
+        // Validación: frescura debe ser mayor a 0
         int freshnessDays = 0;
         validInput = false;
         while (!validInput) {
             try {
                 System.out.print("Días de Frescura: ");
                 freshnessDays = scanner.nextInt();
-                scanner.nextLine(); // Limpiar buffer
-                validInput = true;
+                scanner.nextLine();
+                if (freshnessDays <= 0) {
+                    System.out.println("Los días de frescura deben ser mayores que 0.");
+                } else {
+                    validInput = true;
+                }
             } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
-                scanner.nextLine(); // Limpiar buffer tras excepción
+                System.out.println("Entrada inválida. Ingrese un número entero.");
+                scanner.nextLine();
             }
         }
 
-        // Establecer fecha de admisión como el momento actual
         LocalDateTime dateAdmission = LocalDateTime.now();
 
-        // Crear el producto a través del servicio
-        organicStoreServices.createProduct(typeProduct, nameProduct, idSupplier,
-                dateAdmission, "Orgánico", price, specificType, freshnessDays);
-
-        System.out.println("Producto creado exitosamente.");
+        organicStoreServices.createProduct(
+            typeProduct, nameProduct, idSupplier,
+            dateAdmission, "Orgánico", price, specificType, freshnessDays
+        );
     }
 
-    // Flujo para listar todos los productos orgánicos registrados.
-
+    // Muestra todos los productos orgánicos registrados
     private void listAllOrganicProductFlow() {
+        ConsoleUtils.clearConsole();
         System.out.println("\n--- Listado de Todos los Productos ---");
         List<OrganicProduct> allOrganicProducts = organicStoreServices.getAllOrganicProducts();
 
-        // Verificar si existen productos registrados
         if (allOrganicProducts.isEmpty()) {
             System.out.println("No hay productos registrados.");
         } else {
-            // Mostrar detalles de cada producto
             for (OrganicProduct s : allOrganicProducts) {
-                System.out.println(s.getDetails()); // Llamar al método getDetails() de cada producto
+                System.out.println(s.getDetails());
             }
         }
     }
 
-    // Flujo para eliminar un producto del inventario.
+    // Elimina un producto por su nombre
     public void deleteOrganicProductFlow() {
+        ConsoleUtils.clearConsole();
         System.out.println("\n--- Eliminar Producto ---");
         System.out.print("Ingrese el nombre del producto a eliminar: ");
         String nameProduct = scanner.nextLine();
 
-        // Intentar eliminar el producto
         OrganicProduct deletedProduct = organicStoreServices.deleteOrganicProduct(nameProduct);
 
-        // Informar resultado de la operación
         if (deletedProduct != null) {
             System.out.println("Producto eliminado: " + deletedProduct.getNameProduct());
         } else {
