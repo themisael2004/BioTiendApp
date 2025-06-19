@@ -10,9 +10,9 @@ import model.Product.Fruit;
 
 public class OrganicStoreServices {
     // Atributos de la clase
-    /** Lista que almacena todos los productos orgánicos en el inventario */
+    // Lista que almacena todos los productos orgánicos en el inventario */
     private List<OrganicProduct> inventory;
-    /** Contador para generar IDs únicos y secuenciales para nuevos productos */
+    // Contador para generar IDs únicos y secuenciales para nuevos productos */
     private int nextId;
 
     /**
