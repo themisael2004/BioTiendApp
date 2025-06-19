@@ -35,8 +35,9 @@ public class SupplierUi {
             }
 
             // Pausa para permitir leer la salida
-            if (choice != 0) {
-                ConsoleUtils.pause();
+             if (choice != 0) {
+                System.out.println("Presione Enter para continuar...");
+                scanner.nextLine(); // Espera que el usuario presione Enter
             }
 
         } while (choice != 0);

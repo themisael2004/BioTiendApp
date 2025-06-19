@@ -39,8 +39,9 @@ public class ProductUi {
                 default -> System.out.println("Opción inválida, por favor intente nuevamente.");
             }
 
-            if (option != 0) {
-                ConsoleUtils.pause(); // Pausa antes de continuar
+             if (option != 0) {
+                System.out.println("Presione Enter para continuar...");
+                scanner.nextLine(); // Espera que el usuario presione Enter
             }
         } while (option != 0);
     }
