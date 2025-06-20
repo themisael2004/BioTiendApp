@@ -49,7 +49,8 @@ BioTiendApp es una aplicación de consola que permite la <strong>gestión de pro
 ├── 📁 ui
 │   ├── 📋 GeneralMenu.java
 │   ├── 🛒 ProductUi.java
-│   └── 🤝 SupplierUi.java
+│   ├── 🤝 SupplierUi.java
+│   └── ⚙️ ConsoleUtils.java 
 └── 🚀 App.java (Clase principal)
 ```
 
